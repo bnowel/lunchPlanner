@@ -20,7 +20,7 @@
             <span data-bind="text: Address"> </span>
             <span data-bind="text: Phone"> </span>
             <img data-bind="attr:{src: Rating}" /> 
-            <button class="create-outing green" data-bind="attr: { 'data-outing': ko.toJSON($data) }">GO!</button>
+            <button class="create-outing green" data-bind="attr: { 'data-outing': ko.toJSON($data) }">Go!</button>
         </div>
     </section>
 <!-- /ko -->    
@@ -105,7 +105,7 @@
 <div class="modal hide fade">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Getting to know you</h3>
+    <h3 class="green">Getting to know you</h3>
   </div>
   <div class="modal-body">
     <ul>
@@ -119,17 +119,17 @@
         </li>
         <li>
             <label for="availableSeats">If you can drive how many open seats are in your car?</label>
-            <input type="text" id="availableSeats" />
+            <input type="number" id="availableSeats" />
         </li>
         <li>
-            <label for="meetingPlace">Meeting Place:</label><br />
+            <label for="meetingPlace">Meeting Place:</label>
             <textarea id="meetingPlace"></textarea>
         </li>
     </ul>
 
   </div>
   <div class="modal-footer">
-    <a href="#" class="btn btn-primary">Done</a>
+    <a href="#" class="btn btn-success">Done</a>
   </div>
 </div>
 
