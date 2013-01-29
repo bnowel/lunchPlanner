@@ -21,6 +21,15 @@ $(function() {
        });
     });
     
+    $('.searchResults').on('click', '.create-outing', function() {
+        var $this = $(this);
+        
+        console.log($this.data('outing'));
+        $('.modal').modal('show');
+        $('#yourName').focus();
+        socket.emit('createOuting', $this.data('outing'));
+    });
+    
     // Socket Stuff
     var socket = io.connect('/');
     

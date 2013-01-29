@@ -3,58 +3,142 @@
 <style type="text/css">
 </style>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="bootstrap.css">
 </head>
 <body>
-<h1>Frank the Unicorn's Super Fun Lunch Time</h1>
-
-<div>
-    <input type="text" id="terms" placeholder="Search for some lunch"/>
-    <input type="button" id="search" value="Search"/>
-</div>
-
-<div class="searchResults">
-<!-- ko if: businesses != null -->
-    <ul data-bind="foreach: businesses">
-        <li>
+<section class="main">
+    <h1>Frank the Unicorn's Super Fun Lunch Time</h1>
+    <div>
+        <input type="text" id="terms" placeholder="Search for some lunch"/>
+        <button class="search blue" type="button" id="search" value="Search">Search</button>
+    </div>
+<!-- ko if: businesses != null -->    
+    <section class="searchResults column" data-bind="foreach: businesses">
+        <div class="business-block">
             <img data-bind="attr:{src: BizImage}" />
             <span data-bind="text: Name"> </span>
             <span data-bind="text: Address"> </span>
             <span data-bind="text: Phone"> </span>
-            <img data-bind="attr:{src: Rating}" />
-        </li>    
-    </ul>    
-<!-- /ko -->
+            <img data-bind="attr:{src: Rating}" /> 
+            <button class="create-outing green" data-bind="attr: { 'data-outing': ko.toJSON($data) }">GO!</button>
+        </div>
+    </section>
+<!-- /ko -->    
+    
+    <section class="outings column">
+        <h1>Outings</h1>
+        
+        <div class="outing">
+            <div class="left-outing-info">
+                <h2>Jaffa's at 12:30PM</h2>
+                <ul>
+                    <li>
+                        <span class="driver">Bernie</span>
+                    </li>
+                    <li>
+                        <span class="user">Johnny</span>
+                    </li>
+                    <li>                    
+                        <span class="user">James</span>
+                    </li>
+                    <li>                
+                        <span class="user">Brett</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="right-outing-info">
+                <span class="open-seats">3 available</span>
+                <a href="#" class="join-outing">Jump in!</a>
+            </div>
+        </div>
+        
+        <div class="outing">
+            <div class="left-outing-info">
+                <h2>Jaffa's at 12:30PM</h2>
+                <ul>
+                    <li>
+                        <span class="driver">Bernie</span>
+                    </li>
+                    <li>
+                        <span class="user">Johnny</span>
+                    </li>
+                    <li>                    
+                        <span class="user">James</span>
+                    </li>
+                    <li>                
+                        <span class="user">Brett</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="right-outing-info">
+                <span class="open-seats">3 available</span>
+                <a href="#" class="join-outing">Jump in!</a>
+            </div>
+        </div>
+        <div class="outing">
+            <div class="left-outing-info">
+                <h2>Jaffa's at 12:30PM</h2>
+                <ul>
+                    <li>
+                        <span class="driver">Bernie</span>
+                    </li>
+                    <li>
+                        <span class="user">Johnny</span>
+                    </li>
+                    <li>                    
+                        <span class="user">James</span>
+                    </li>
+                    <li>                
+                        <span class="user">Brett</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="right-outing-info">
+                <span class="open-seats">3 available</span>
+                <a href="#" class="join-outing">Jump in!</a>
+            </div>
+        </div>
+    </section>
+</section>
 </div>
 
-<div class="outings">
-    <h3>Outings</h3>
-    
-    <div class="outing">
-        Jaffa's at 12:30PM
-        <ul>
-            <li>
-                <span class="driver">Bernie</span>
-                <span class="user">Johnny</span>
-            </li>
-        </ul>
-    </div>
-    
-    <div class="outing">
-        Burger King at 1:30PM
-        <ul>
-            <li>
-                <span class="driver">Alex</span>
-                <span class="user">Mike</span>
-            </li>
-        </ul>
-    </div>
-    
+<div class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Getting to know you</h3>
+  </div>
+  <div class="modal-body">
+    <ul>
+        <li>
+            <label for="yourName">What is your name?</label>
+            <input type="text" id="yourName" />            
+        </li>
+        <li>
+            <label for="departureTime">When do you want to leave?</label>
+            <input type="time" id="departureTime" />
+        </li>
+        <li>
+            <label for="availableSeats">If you can drive how many open seats are in your car?</label>
+            <input type="text" id="availableSeats" />
+        </li>
+        <li>
+            <label for="meetingPlace">Meeting Place:</label><br />
+            <textarea id="meetingPlace"></textarea>
+        </li>
+    </ul>
+
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-primary">Done</a>
+  </div>
 </div>
-    
+
 </div>
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
   <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/client.js"></script>
+  
 </body>
 </html>
