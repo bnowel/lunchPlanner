@@ -1,15 +1,27 @@
 var express = require('express'), 
     app = express.createServer(),
     user = require('./static/js/user'),
-    io = require('socket.io').listen(app);
+    io = require('socket.io').listen(app),
+    yelp = require("yelp"),
+    yelpCreds = {};
 
+// This is trying to get around not having environment variables when debugging using Cloud9 ide
+try {
+    var DevYelp = require('./static/js/devYelp');
+    yelpCreds = new DevYelp().creds();
+    console.log('devMode');
+} catch(err) {
+    console.log('production');
+    yelpCreds = {
+      consumer_key: process.env.YELP_CONSUMER_KEY, 
+      consumer_secret: process.env.YELP_CONSUMER_SECRET,
+      token: process.env.YELP_TOKEN,
+      token_secret: process.env.YELP_TOKEN_SECRET
+    };
+}
 
-var yelp = require("yelp").createClient({
-  consumer_key: process.env.YELP_CONSUMER_KEY, 
-  consumer_secret: process.env.YELP_CONSUMER_SECRET,
-  token: process.env.YELP_TOKEN,
-  token_secret: process.env.YELP_TOKEN_SECRET
-});
+var yelpClient = yelp.createClient(yelpCreds);
+
 
 app.listen(process.env.C9_PORT || process.env.PORT || 3000);
 
@@ -29,7 +41,7 @@ app.get('/search', function(req, res) {
         term = req.query["term"];
     
     if (term) {
-        yelp.search({term: term, location: location}, function(error, data) {
+        yelpClient.search({term: term, location: location}, function(error, data) {
             console.log(error);
             console.log(data);
            res.send(data); 
