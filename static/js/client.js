@@ -10,7 +10,7 @@ function PageViewModel() {
         },
         {
             name: "Burger King", 
-            display_phone: "22222", 
+            //display_phone: "22222",  // Test what happens when missing
             rating_img_url: "http://s3-media2.ak.yelpcdn.com/assets/2/www/img/99493c12711e/ico/stars/v1/stars_4_half.png"
         }
     ]);
@@ -18,15 +18,16 @@ function PageViewModel() {
 
 $(function() {
     // Knockout stuff
-    ko.applyBindings(new PageViewModel());    
+    var pageViewModel = new PageViewModel();
+    ko.applyBindings(pageViewModel);    
     
     
     // Page stuff
     $('#search').on('click', function() {
         console.log('searching...');
        $.get('search', {term: $('#terms').val()}, function(data) {
-           PageViewModel.businesses = data.businesses;
-           console.log(data);
+           pageViewModel.businesses(data.businesses);
+           console.log(data.businesses);
        });
     });
     
