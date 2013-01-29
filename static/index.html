@@ -12,6 +12,16 @@
     <input type="button" id="search" value="Search"/>
 </div>
 
+<div class="searchResults">
+    <ul data-bind="foreach: businesses">
+        <li>
+            <span data-bind="text: name"> </span>
+            <span data-bind="text: display_phone"> </span>
+            <img data-bind="attr:{src: rating_img_url}" />
+        </li>    
+    </ul>    
+</div>
+
 <div class="outings">
     <h3>Outings</h3>
     
@@ -39,6 +49,7 @@
     
 </div>
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/client.js"></script>
 </body>
