@@ -58,7 +58,9 @@ io.sockets.on('connection', function (socket) {
     console.log('user connected');
     
     socket.emit('joined', { "id": socket.id });
-    
+    socket.on('createOuting', function(data) {
+        console.log(data);
+    });
     socket.on('disconnect', function() {
         console.log('user disconnected');
     });
