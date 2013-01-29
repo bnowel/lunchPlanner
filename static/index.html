@@ -12,14 +12,18 @@
         <input type="text" id="terms" placeholder="Search for some lunch"/>
         <button class="search blue" type="button" id="search" value="Search">Search</button>
     </div>
+<!-- ko if: businesses != null -->    
     <section class="searchResults column" data-bind="foreach: businesses">
         <div class="business-block">
-            <span data-bind="text: name"> </span>
-            <span data-bind="text: location.address"> </span>
-            <img data-bind="attr:{src: rating_img_url}" /> 
+            <img data-bind="attr:{src: BizImage}" />
+            <span data-bind="text: Name"> </span>
+            <span data-bind="text: Address"> </span>
+            <span data-bind="text: Phone"> </span>
+            <img data-bind="attr:{src: Rating}" /> 
             <button class="create-outing green" data-bind="attr: { 'data-outing': ko.toJSON($data) }">GO!</button>
-        </div>    
+        </div>
     </section>
+<!-- /ko -->    
     
     <section class="outings column">
         <h1>Outings</h1>
