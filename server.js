@@ -76,6 +76,7 @@ function mapper(data) {
         tempObject.Name = data[i].name;
         tempObject.Phone = data[i].hasOwnProperty('display_phone') ? data[i].display_phone : '';
         tempObject.Rating = data[i].hasOwnProperty('rating_img_url') ? data[i].rating_img_url : '';
+        tempObject.Review = data[i].hasOwnProperty('snippet_text') ? data[i].snippet_text : '';
         tempObject.ID = data[i].id;
         tempObject.BizImage = data[i].hasOwnProperty('image_url') ? data[i].image_url : '';
 
