@@ -72,7 +72,7 @@ function mapper(data) {
     var result = [];
     var length = data.length;
     
-    for (i = 0; i < length; i++) {
+    for (var i = 0; i < length; i++) {
         var tempObject = {};
         
         tempObject.Name = data[i].name;
@@ -82,17 +82,21 @@ function mapper(data) {
         tempObject.ID = data[i].id;
         tempObject.BizImage = data[i].hasOwnProperty('image_url') ? data[i].image_url : '';
 
+        tempObject.Address = '';    
+        tempObject.LatLon = {lat: '', lon: ''}; 
+        
         if(data[i].hasOwnProperty('location')) {
             
             if(data[i].location.hasOwnProperty('display_address')) {
-                tempObject.Address = '';
-                var temp = data[i].location.display_address
+                var temp = data[i].location.display_address;
                 for (var key in temp) {
                     tempObject.Address = tempObject.Address + " " + temp[key];
                 }            
             }
-        } else {
-            tempObject.Address = '';
+            
+            if(data[i].location.hasOwnProperty('coordinate') && data[i].location.coordinate.hasOwnProperty('latitude') && data[i].location.coordinate.hasOwnProperty('longitude')) {
+                tempObject.LatLon = {lat: data[i].location.coordinate.latitude, lon: data[i].location.coordinate.longitude};
+            }
         }
 
         result.push(tempObject);
