@@ -2,18 +2,7 @@
 function PageViewModel() {
     var self = this;
     
-    self.businesses = ko.observableArray([
-        {
-            name: "Jaffa", 
-            display_phone: "80566666", 
-            rating_img_url: "http://s3-media2.ak.yelpcdn.com/assets/2/www/img/99493c12711e/ico/stars/v1/stars_4_half.png"
-        },
-        {
-            name: "Burger King", 
-            //display_phone: "22222",  // Test what happens when missing
-            rating_img_url: "http://s3-media2.ak.yelpcdn.com/assets/2/www/img/99493c12711e/ico/stars/v1/stars_4_half.png"
-        }
-    ]);
+    self.businesses = ko.observableArray([]);
 }
 
 $(function() {
@@ -26,8 +15,9 @@ $(function() {
     $('#search').on('click', function() {
         console.log('searching...');
        $.get('search', {term: $('#terms').val()}, function(data) {
-           pageViewModel.businesses(data.businesses);
-           console.log(data.businesses);
+           console.log(data);
+           pageViewModel.businesses(data);
+          
        });
     });
     
