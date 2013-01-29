@@ -16,6 +16,7 @@
 <!-- ko if: businesses != null -->
     <ul data-bind="foreach: businesses">
         <li>
+            <img data-bind="attr:{src: BizImage}" />
             <span data-bind="text: Name"> </span>
             <span data-bind="text: Address"> </span>
             <span data-bind="text: Phone"> </span>

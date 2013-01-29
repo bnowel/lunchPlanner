@@ -66,6 +66,7 @@ io.sockets.on('connection', function (socket) {
 
 
 function mapper(data) {
+    console.log(data);
     var result = [];
     var length = data.length;
     
@@ -76,6 +77,7 @@ function mapper(data) {
         tempObject.Phone = data[i].hasOwnProperty('display_phone') ? data[i].display_phone : '';
         tempObject.Rating = data[i].hasOwnProperty('rating_img_url') ? data[i].rating_img_url : '';
         tempObject.ID = data[i].id;
+        tempObject.BizImage = data[i].image_url;
 
         if(data[i].hasOwnProperty('location')) {
             
