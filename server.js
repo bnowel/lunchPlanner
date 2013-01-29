@@ -11,13 +11,6 @@ var yelp = require("yelp").createClient({
   token_secret: process.env.YELP_TOKEN_SECRET
 });
 
-/*
-console.log(process.env.YELP_CONSUMER_KEY);
-console.log(process.env.YELP_CONSUMER_SECRET);
-console.log(process.env.YELP_TOKEN);
-console.log(process.env.YELP_TOKEN_SECRET);
-*/   
-
 app.listen(process.env.C9_PORT || process.env.PORT || 3000);
 
 app.configure(function(){
@@ -36,7 +29,7 @@ app.get('/search', function(req, res) {
         term = req.query["term"];
     
     if (term) {
-        yelp.search({term: req.params.term, location: location}, function(error, data) {
+        yelp.search({term: term, location: location}, function(error, data) {
             console.log(error);
             console.log(data);
            res.send(data); 
