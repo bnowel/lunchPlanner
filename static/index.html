@@ -6,47 +6,96 @@
 <link rel="stylesheet" href="bootstrap.css">
 </head>
 <body>
-<h1>Frank the Unicorn's Super Fun Lunch Time</h1>
-
-<div>
-    <input type="text" id="terms" placeholder="Search for some lunch"/>
-    <input type="button" id="search" value="Search"/>
-</div>
-
-<div class="searchResults">
-    <ul data-bind="foreach: businesses">
-        <li>
+<section class="main">
+    <h1>Frank the Unicorn's Super Fun Lunch Time</h1>
+    <div>
+        <input type="text" id="terms" placeholder="Search for some lunch"/>
+        <button class="search blue" type="button" id="search" value="Search">Search</button>
+    </div>
+    <section class="searchResults column" data-bind="foreach: businesses">
+        <div class="business-block">
             <span data-bind="text: name"> </span>
             <span data-bind="text: location.address"> </span>
-            <img data-bind="attr:{src: rating_img_url}" />
-            <button class="create-outing" data-bind="attr: { 'data-outing': ko.toJSON($data) }"></button>
-        </li>    
-    </ul>    
-</div>
-
-<div class="outings">
-    <h3>Outings</h3>
+            <img data-bind="attr:{src: rating_img_url}" /> 
+            <button class="create-outing green" data-bind="attr: { 'data-outing': ko.toJSON($data) }">GO!</button>
+        </div>    
+    </section>
     
-    <div class="outing">
-        Jaffa's at 12:30PM
-        <ul>
-            <li>
-                <span class="driver">Bernie</span>
-                <span class="user">Johnny</span>
-            </li>
-        </ul>
-    </div>
-    
-    <div class="outing">
-        Burger King at 1:30PM
-        <ul>
-            <li>
-                <span class="driver">Alex</span>
-                <span class="user">Mike</span>
-            </li>
-        </ul>
-    </div>
-    
+    <section class="outings column">
+        <h1>Outings</h1>
+        
+        <div class="outing">
+            <div class="left-outing-info">
+                <h2>Jaffa's at 12:30PM</h2>
+                <ul>
+                    <li>
+                        <span class="driver">Bernie</span>
+                    </li>
+                    <li>
+                        <span class="user">Johnny</span>
+                    </li>
+                    <li>                    
+                        <span class="user">James</span>
+                    </li>
+                    <li>                
+                        <span class="user">Brett</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="right-outing-info">
+                <span class="open-seats">3 available</span>
+                <a href="#" class="join-outing">Jump in!</a>
+            </div>
+        </div>
+        
+        <div class="outing">
+            <div class="left-outing-info">
+                <h2>Jaffa's at 12:30PM</h2>
+                <ul>
+                    <li>
+                        <span class="driver">Bernie</span>
+                    </li>
+                    <li>
+                        <span class="user">Johnny</span>
+                    </li>
+                    <li>                    
+                        <span class="user">James</span>
+                    </li>
+                    <li>                
+                        <span class="user">Brett</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="right-outing-info">
+                <span class="open-seats">3 available</span>
+                <a href="#" class="join-outing">Jump in!</a>
+            </div>
+        </div>
+        <div class="outing">
+            <div class="left-outing-info">
+                <h2>Jaffa's at 12:30PM</h2>
+                <ul>
+                    <li>
+                        <span class="driver">Bernie</span>
+                    </li>
+                    <li>
+                        <span class="user">Johnny</span>
+                    </li>
+                    <li>                    
+                        <span class="user">James</span>
+                    </li>
+                    <li>                
+                        <span class="user">Brett</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="right-outing-info">
+                <span class="open-seats">3 available</span>
+                <a href="#" class="join-outing">Jump in!</a>
+            </div>
+        </div>
+    </section>
+</section>
 </div>
 
 <div class="modal hide fade">
