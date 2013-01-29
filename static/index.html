@@ -13,13 +13,16 @@
 </div>
 
 <div class="searchResults">
+<!-- ko if: businesses != null -->
     <ul data-bind="foreach: businesses">
         <li>
-            <span data-bind="text: name"> </span>
-            <span data-bind="text: location.address"> </span>
-            <img data-bind="attr:{src: rating_img_url}" />
+            <span data-bind="text: Name"> </span>
+            <span data-bind="text: Address"> </span>
+            <span data-bind="text: Phone"> </span>
+            <img data-bind="attr:{src: Rating}" />
         </li>    
     </ul>    
+<!-- /ko -->
 </div>
 
 <div class="outings">
