@@ -1,6 +1,8 @@
 /* resets */
 html {
-    font-size: 1em;    
+    font-size: 1em;
+    font-family: "Helvetica";
+    background: #eee;
 }
 ul{
     margin: 0;
@@ -26,7 +28,7 @@ section.column {
     padding: .625em;
     box-sizing: border-box;
     overflow: hidden;
-    background: rgb(200,227,250);
+    background: rgb(38,88,153); /*rgb(200,227,250)*/;
 }
 .searchResults {
     width: 69%;
@@ -74,7 +76,7 @@ section.column {
 }
 .outing {
     overflow: hidden;
-    border: 1px solid lightgrey;
+    border: 1px solid rgb(200,227,250);
     margin: 10px 0;
     border-radius: 4px;
     padding: 5px 5px 5px 0;
@@ -91,7 +93,7 @@ section.column {
     overflow: hidden;
     width: 30%;
     float: left;
-    border-left: .063em solid lightgrey;
+    border-left: .063em solid rgb(200,227,250);
     height: 109%;
     box-sizing: border-box;
     padding: .5em;
@@ -103,16 +105,22 @@ section.column {
 }
 .outing ul li {
     padding: .1em .3em;
+    border-bottom: .093em solid rgb(200,227,250);
 }
 .outing ul li:nth-child(2n+2) {
-    background: lightgrey;
+    background: rgb(200,227,250);
+}
+.outings h1 {
+    color: white;
+    font-weight: normal;
+    font-size: 1.5em;
 }
 h2 {
     font-size: .9em;
     width: 100%;
     padding-left: .4em;
     float: left;
-    border-bottom: .093em solid lightgrey;
+    border-bottom: .093em solid rgb(200,227,250);
 }
 #terms {
     width: 60%;
