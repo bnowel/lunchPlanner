@@ -6,8 +6,18 @@ var express = require('express'),
     yelp = require("yelp"),
     yelpCreds = {};
     
-var outingList = [];
-var outingID = 0;
+io.configure(function() {
+  io.set('log level', 1);
+
+  io.set('transports', [
+      'xhr-polling'
+    //'websocket'
+  //, 'flashsocket'
+  //, 'htmlfile'
+  //, 'xhr-polling'
+  //, 'jsonp-polling'
+  ]);
+});
 
 // This is trying to get around not having environment variables when debugging using Cloud9 ide
 try {
@@ -56,6 +66,10 @@ app.get('/search', function(req, res) {
         res.send("Error");
     }
 });
+
+
+var outingList = [];
+var outingID = 0;
 
 function updateOutings(socket) {
     console.log("updateOutings()");
