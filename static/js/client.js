@@ -27,7 +27,7 @@ $(function() {
         var $this = $(this);
         
         console.log($this.data('destination'));
-        $('.modal.create-outing').modal('show');
+        $('.create-outing-info').modal('show');
         $('#yourName').focus();
         $('#addOutingBtn').data("destination", $this.data('destination'));        
     });
@@ -44,6 +44,8 @@ $(function() {
         socket.emit('createOuting', { destination: $(this).data('destination'), user: { name: $('#yourName').val(), availableCarSeats: $('#availableSeats').val() }, departureTime: $('#departureTime').val(), meetingPlace: $('#meetingPlace').val(), drivingTransport: $('#drivingTransport').val(), walkingTransport: $('#walkingTransport').val() });
         $('.modal').modal('hide');
     });
+    
+    $('.searchResults').popover({ selector: '[rel=popover]', html: true, trigger: 'hover', placement: 'bottom' });
     
     $('#joinOutingBtn').click(function() {
         socket.emit('joinOuting', { destination: $(this).data('destination'), user: { name: $('#yourName').val(), availableCarSeats: $('#availableSeats').val() } });

@@ -57,11 +57,22 @@ app.get('/search', function(req, res) {
     }
 });
 
+function updateOutings(socket) {
+    var flattifiedOutingList = new Array();
+    
+    for(var i = 0; i < outingList.length; i++)
+    {
+        flattifiedOutingList.push(outingList[i].flattify());
+    }
+    socket.emit('updateOutings', flattifiedOutingList);
+}
+
 // When someone connects
 io.sockets.on('connection', function (socket) {
     console.log('user connected');
     
-    socket.emit('joined', { "id": socket.id });
+    //socket.emit('joined', { "id": socket.id });
+    updateOutings(socket);
     
     socket.on('createOuting', function(data) {
         var isUserDriver = data.user.availableCarSeats > 0;
@@ -81,13 +92,7 @@ io.sockets.on('connection', function (socket) {
         
         
         outingList.push(outing);
-        
-        var flattifiedOutingList = new Array();
-        for(var i = 0; i < outingList.length; i++)
-        {
-            flattifiedOutingList.push(outingList[i].flattify());
-        }
-        socket.emit('updateOutings', flattifiedOutingList);
+        updateOutings(socket);
     });
     
     socket.on('joinOuting', function(data) {
