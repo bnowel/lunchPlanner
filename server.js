@@ -87,7 +87,9 @@ function updateOutings() {
 }
 
 function addMinutes(date, minutes) {
-    return new Date(date.getTime() + minutes*60000);
+    var dateToReturn = new Date(date.getTime() + minutes*60000);
+    
+    return dateToReturn.getHours() + ":" + dateToReturn.getMinutes();
 }
 
 function getUserFromCreateOuting(socketId, data) {
