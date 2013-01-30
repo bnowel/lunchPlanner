@@ -54,7 +54,7 @@ $(function() {
         if (!name) {
             return;
         }
-        socket.emit('joinOuting', { outing: $(this).data('outing'), user: { name: name, availableCarSeats: $('#availableSeats').val() } });
+        socket.emit('joinOuting', { outing: $(this).data('outing'), user: { name: name, availableCarSeats: $('#availableSeatsJoin').val() } });
         $('.modal').modal('hide');
     });
     

@@ -30,14 +30,14 @@ function User(details) {
     };
     // End Name
     
-    var isDriver;
+   // var isDriver;
     this.getIsDriver = function() {
-        return isDriver;  
+        return this.getAvailableCarSeats() > 0;  
     };
     
-    this.setIsDriver = function(val) {
-        isDriver = val;
-    };
+  //  this.setIsDriver = function(val) {
+   //     isDriver = val;
+ //   };
     // End driver
     
     var availableCarSeats = 0;
@@ -52,14 +52,13 @@ function User(details) {
     
     // Make it flat
     this.flattify = function() {
-        return { id: id, name: name, isDriver: isDriver, availableCarSeats: availableCarSeats };
+        return { id: id, name: name, isDriver: this.getIsDriver(), availableCarSeats: availableCarSeats };
     };
     
     // Check to see if we got this passed
     if (details) {
         this.setId( details.id );
         this.setName( details.name );
-        this.setIsDriver( details.isDriver );
         this.setAvailableCarSeats( details.availableCarSeats );
     }
 }
