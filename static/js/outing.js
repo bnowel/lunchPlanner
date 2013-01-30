@@ -60,9 +60,19 @@ function Outing(details) {
     // End transport
     
     // If this has any available car seats. Internally set
-    var availableCarSeats = 0;
+//    var availableCarSeats = 0;
     this.getAvailableCarSeats = function() {
-        return availableCarSeats;  
+        console.log('getAvailSeats');
+        var availableCarSeats = 0;
+        var numberOfDrivers = 0;
+        for(var i = 0; i < users.length; i++) {
+            console.log(users[i].getName());
+            console.log(users[i].getIsDriver());
+            availableCarSeats += users[i].getAvailableCarSeats();
+            numberOfDrivers += users[i].getIsDriver() ? 1 : 0;
+        }
+        console.log('users length is ' + users.length + ' and number of drivers is ' + numberOfDrivers);
+        return availableCarSeats - (users.length - numberOfDrivers);  
     };
     
     // Whether or not this has a driver. Internally set
@@ -94,7 +104,7 @@ function Outing(details) {
         if (transport == "drive" && user.getIsDriver())
         {
             hasDriver = true;
-            availableCarSeats = user.getAvailableCarSeats();
+        //    availableCarSeats = user.getAvailableCarSeats();
         }
     };
     
@@ -115,7 +125,7 @@ function Outing(details) {
                 if (users[i].getIsDriver())
                 {
                     hasDriver = false;
-                    availableCarSeats = 0;
+                  //  availableCarSeats = 0;
                 }
                 
                 break;
@@ -163,7 +173,7 @@ function Outing(details) {
             flattifiedUsers.push(users[i].flattify());
         }
                 
-        return { id: id, name: name, destination: destination, meetingPlace: meetingPlace, users: flattifiedUsers, joinTimes: joinTimes, hasDriver: hasDriver, availableCarSeats: availableCarSeats, transport: transport, departureTime: departureTime };
+        return { id: id, name: name, destination: destination, meetingPlace: meetingPlace, users: flattifiedUsers, joinTimes: joinTimes, hasDriver: hasDriver, availableCarSeats: this.getAvailableCarSeats(), transport: transport, departureTime: departureTime };
     };
     
     
