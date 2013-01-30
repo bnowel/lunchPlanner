@@ -69,6 +69,7 @@ io.sockets.on('connection', function (socket) {
         var userData = {id: socket.id, name: data.user.name, isDriver: isUserDriver, availableCarSeats: data.user.availableCarSeats };
         var newUser = new User(userData);
         
+        console.log("Destination: " + JSON.stringify(data.destination));
         var transport = "";
         
         if (data.drivingTransport)

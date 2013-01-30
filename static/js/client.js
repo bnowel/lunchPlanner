@@ -33,7 +33,8 @@ $(function() {
         
     });
     
-    $('#addOutingBtn').click(function() {        
+    $('#addOutingBtn').click(function() {
+        console.log("DATA: " + $(this).data('destination'));
         socket.emit('createOuting', { destination: $(this).data('destination'), user: { name: $('#yourName').val(), availableCarSeats: $('#availableSeats').val() }, departureTime: $('#departureTime').val(), meetingPlace: $('#meetingPlace').val(), drivingTransport: $('#drivingTransport').val(), walkingTransport: $('#walkingTransport').val() });
         $('.modal').modal('hide');
     });
