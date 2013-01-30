@@ -32,11 +32,11 @@ $(function() {
         $('#addOutingBtn').data("destination", $this.data('destination'));        
     });
     
-    $('.outings').on('click', '.join-outing', function() {
+    $('.outings').on('click', '.join-outing', function(ev) {
         var $this = $(this);
+        ev.preventDefault();
         
         $('.modal.join-outing').modal('show');
-        $('#yourNameJoin').focus();
         $('#joinOutingBtn').data("outing", $this.data('outing'));        
     });
     
@@ -47,8 +47,14 @@ $(function() {
     
     $('.searchResults').popover({ selector: '[rel=popover]', html: true, trigger: 'hover', placement: 'bottom' });
     
-    $('#joinOutingBtn').click(function() {
-        socket.emit('joinOuting', { outing: $(this).data('outing'), user: { name: $('#yourNameJoin').val(), availableCarSeats: $('#availableSeats').val() } });
+    $('#joinOutingBtn').click(function(ev) {
+        ev.preventDefault();
+        
+        var name = $('#yourNameJoin').val();
+        if (!name) {
+            return;
+        }
+        socket.emit('joinOuting', { outing: $(this).data('outing'), user: { name: name, availableCarSeats: $('#availableSeats').val() } });
         $('.modal').modal('hide');
     });
     

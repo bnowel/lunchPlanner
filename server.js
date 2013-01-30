@@ -113,7 +113,7 @@ function getOutingFromCreateOuting(user, data) {
     return new Outing({ 
             id: outingID++, 
             setTransport: transport, 
-            departureTime: data.departureTime || addMinutes(new Date(), 30).getTime(), 
+            departureTime: data.departureTime || addMinutes(new Date(), 30), 
             user: user, 
             destination: data.destination, 
             meetingPlace: data.meetingPlace
@@ -149,6 +149,7 @@ io.sockets.on('connection', function (socket) {
     });
     
     socket.on('disconnect', function() {
+        console.log('user ' + socket.id + " disconnected");
         // Remove user from any outings they are a part of
         for (var i = 0; i < outingList.length; i++) {
             
