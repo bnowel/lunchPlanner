@@ -6,7 +6,7 @@ var express = require('express'),
     yelp = require("yelp"),
     yelpCreds = {};
     
-var outingList = new Array();
+var outingList = [];
 var outingID = 0;
 
 // This is trying to get around not having environment variables when debugging using Cloud9 ide
@@ -62,9 +62,42 @@ function updateOutings(socket) {
     
     for(var i = 0; i < outingList.length; i++)
     {
-        flattifiedOutingList.push(outingList[i].flattify());
+        // Make sure this outing wasn't deleted
+        if (outingList[i]) {
+            flattifiedOutingList.push(outingList[i].flattify());
+        }
     }
     socket.emit('updateOutings', flattifiedOutingList);
+}
+
+function addMinutes(date, minutes) {
+    return new Date(date.getTime() + minutes*60000);
+}
+
+function getOutingFromData(socketId, data) {
+    // If someone doesn't fill in the number of seats then say it's zero
+    var availableSeats = parseInt(data.user.availableCarSeats, 10) || 0,
+        isUserDriver = availableSeats > 0;
+    
+    console.log("Number of seats: " + availableSeats);
+    var userData = {id: socketId, name: data.user.name, isDriver: isUserDriver, availableCarSeats: availableSeats };
+    var newUser = new User(userData);
+    
+    var transport = "";
+    
+    if (data.drivingTransport)
+        transport = "drive";
+    else
+        transport = "walk";
+    
+    return new Outing({ 
+        id: outingID++, 
+        setTransport: transport, 
+        departureTime: data.departureTime || addMinutes(new Date(), 30), 
+        user: newUser, 
+        destination: data.destination, 
+        meetingPlace: data.meetingPlace
+    });    
 }
 
 // When someone connects
@@ -75,35 +108,22 @@ io.sockets.on('connection', function (socket) {
     updateOutings(socket);
     
     socket.on('createOuting', function(data) {
-        // If someone doesn't fill in the number of seats then say it's zero
-        var availableSeats = parseInt(data.user.availableCarSeats, 10) || 0,
-            isUserDriver = availableSeats > 0;
-        
-        console.log("Number of seats: " + availableSeats);
-        var userData = {id: socket.id, name: data.user.name, isDriver: isUserDriver, availableCarSeats: availableSeats };
-        var newUser = new User(userData);
-        
-        var transport = "";
-        
-        if (data.drivingTransport)
-            transport = "drive";
-        else
-            transport = "walk";
-        
-        var outing = new Outing({ id: outingID++, setTransport: transport, departureTime: data.departureTime, user: newUser, destination: data.destination, meetingPlace: data.meetingPlace });
-        
-        
+        var outing = getOutingFromData(socket.id, data);
         
         outingList.push(outing);
         updateOutings(socket);
     });
     
     socket.on('joinOuting', function(data) {
-        console.log(data);
+        var outing = getOutingFromData(socket.id, data);
+        
+        outingList.push(outing);
+        updateOutings(socket);
     });
     
     socket.on('disconnect', function() {
-        console.log('user disconnected');
+        // Remove user for any outings they are a part of
+        updateOutings(socket);
     });
 });
 
