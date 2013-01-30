@@ -146,3 +146,6 @@ button.close {
 .modal input[type="number"]{
     width: 30px;
 }
+.modal .radioLabel {
+    display: inline-block;
+}

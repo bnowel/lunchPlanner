@@ -20,85 +20,31 @@
             <span data-bind="text: Address"> </span>
             <span data-bind="text: Phone"> </span>
             <img data-bind="attr:{src: Rating}" /> 
-            <button class="create-outing green" data-bind="attr: { 'data-outing': ko.toJSON($data) }">Go!</button>
+            <button class="create-outing green" data-bind="attr: { 'data-destination': ko.toJSON($data) }">Go!</button>
         </div>
     </section>
 <!-- /ko -->    
-    
-    <section class="outings column">
+
+<!-- ko if: outings != null -->    
+    <section class="outings column" data-bind="foreach: outings">
         <h1>Outings</h1>
         
         <div class="outing">
             <div class="left-outing-info">
-                <h2>Jaffa's at 12:30PM</h2>
+                <h2 data-bind="text: name"></h2>
                 <ul>
-                    <li>
-                        <span class="driver">Bernie</span>
-                    </li>
-                    <li>
-                        <span class="user">Johnny</span>
-                    </li>
-                    <li>                    
-                        <span class="user">James</span>
-                    </li>
-                    <li>                
-                        <span class="user">Brett</span>
-                    </li>
+                    <li data-bind="foreach: $data.users">
+                        <span data-bind="text: name"> </span>
+                    </li>                    
                 </ul>
             </div>
             <div class="right-outing-info">
-                <span class="open-seats">3 available</span>
-                <a href="#" class="join-outing">Jump in!</a>
-            </div>
-        </div>
-        
-        <div class="outing">
-            <div class="left-outing-info">
-                <h2>Jaffa's at 12:30PM</h2>
-                <ul>
-                    <li>
-                        <span class="driver">Bernie</span>
-                    </li>
-                    <li>
-                        <span class="user">Johnny</span>
-                    </li>
-                    <li>                    
-                        <span class="user">James</span>
-                    </li>
-                    <li>                
-                        <span class="user">Brett</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="right-outing-info">
-                <span class="open-seats">3 available</span>
-                <a href="#" class="join-outing">Jump in!</a>
-            </div>
-        </div>
-        <div class="outing">
-            <div class="left-outing-info">
-                <h2>Jaffa's at 12:30PM</h2>
-                <ul>
-                    <li>
-                        <span class="driver">Bernie</span>
-                    </li>
-                    <li>
-                        <span class="user">Johnny</span>
-                    </li>
-                    <li>                    
-                        <span class="user">James</span>
-                    </li>
-                    <li>                
-                        <span class="user">Brett</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="right-outing-info">
-                <span class="open-seats">3 available</span>
+                <span class="open-seats" data-bind="text: $data.availableCarSeats + ' available'"></span>
                 <a href="#" class="join-outing">Jump in!</a>
             </div>
         </div>
     </section>
+<!-- /ko -->
 </section>
 </div>
 
@@ -118,6 +64,12 @@
             <input type="time" id="departureTime" />
         </li>
         <li>
+            <label for="drivingTransport" class="radioLabel">Driving</label>
+            <input type="radio" name="transport" id="drivingTransport" checked />
+            <label for="walkingTransport" class="radioLabel">Walking</label>
+            <input type="radio" name="transport" id="walkingTransport" />
+        </li>
+        <li>
             <label for="availableSeats">If you can drive how many open seats are in your car?</label>
             <input type="number" id="availableSeats" />
         </li>
@@ -129,7 +81,7 @@
 
   </div>
   <div class="modal-footer">
-    <a href="#" class="btn btn-success">Done</a>
+    <a href="#" id="addOutingBtn" class="btn btn-success">Done</a>
   </div>
 </div>
 
