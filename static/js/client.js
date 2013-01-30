@@ -3,6 +3,8 @@ function PageViewModel() {
     var self = this;
     
     self.businesses = ko.observableArray([]);
+        
+    self.outings = ko.observableArray([]);
 }
 
 $(function() {
@@ -24,10 +26,16 @@ $(function() {
     $('.searchResults').on('click', '.create-outing', function() {
         var $this = $(this);
         
-        console.log($this.data('outing'));
+        console.log($this.data('destination'));
         $('.modal').modal('show');
         $('#yourName').focus();
-        socket.emit('createOuting', $this.data('outing'));
+        $('#addOutingBtn').data("destination", $this.data('destination'));
+        
+    });
+    
+    $('#addOutingBtn').click(function() {        
+        socket.emit('createOuting', { destination: $(this).data('destination'), user: { name: $('#yourName').val(), availableCarSeats: $('#availableSeats').val() }, departureTime: $('#departureTime').val(), meetingPlace: $('#meetingPlace').val(), drivingTransport: $('#drivingTransport').val(), walkingTransport: $('#walkingTransport').val() });
+        $('.modal').modal('hide');
     });
     
     $('.searchResults').popover({ selector: '[rel=popover]', html: true, trigger: 'hover', placement: 'bottom' });
@@ -46,5 +54,11 @@ $(function() {
     socket.on('joined', function(data) {
         console.log(data);
       // doSomethingWith(data)
+    });
+    
+    socket.on('updateOutings', function(data) {
+        console.log("BEFORE, YO: " + JSON.stringify(data));
+        pageViewModel.outings(data);
+        console.log(pageViewModel.outings());
     });
 });

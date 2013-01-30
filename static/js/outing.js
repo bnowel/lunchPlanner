@@ -52,7 +52,7 @@ function Outing(details) {
         return transport;
     };
     
-    var setTransport = function(val) {
+    this.setTransport = function(val) {
         if (val === "")
             throw "Transport cannot be blank";
         transport = val;
@@ -83,37 +83,29 @@ function Outing(details) {
     };
     
     // User tries to join an outing.
-    var joinOuting = function(user) {
+    this.joinOuting = function(user) {
         if (user === "")
             throw "Must enter a user Object";
             
-        if (joinTimes === null)
-        {
-            joinTimes = new Array(100);
-        }
-        if (users === null)
-        {
-            users = new Array(100);
-        }
-        
         users.push(user);
-        joinTimes.push({ id: user.id, time: new Date.getTime()});
+        joinTimes.push({ id: user.id, time: new Date().getTime()});
         
-        if (transport == "drive" && user.isDriver)
+        console.log(transport + " |||| " + JSON.stringify(user.flattify()));
+        if (transport == "drive" && user.getIsDriver())
         {
             hasDriver = true;
-            availableCarSeats = user.availableCarSeats;
+            availableCarSeats = user.getAvailableCarSeats();
         }
     };
     
     // User tries to leave an outing.
-    var leaveOuting = function(user){
+    this.leaveOuting = function(user){
         if (user === "")
             throw "Must enter a user object";
         
         // Find index of user we're removing.
         var index = -1;
-        for (var i = 0; i < joinTimes.length(); i++)
+        for (var i = 0; i < joinTimes.length; i++)
         {
             if (joinTimes[i].id == user.id)
             {
@@ -158,16 +150,32 @@ function Outing(details) {
         meetingPlace = meeting;
     };
     
+    // Make it flat
+    this.flattify = function() {
+        
+        var flattifiedUsers = new Array();
+        
+        for (var i = 0; i < users.length; i++)
+        {
+            flattifiedUsers.push(users[i].flattify());
+        }
+        
+        return { id: id, name: name, destination: destination, meetingPlace: meetingPlace, users: flattifiedUsers, joinTimes: joinTimes, hasDriver: hasDriver, availableCarSeats: availableCarSeats, transport: transport, departureTime: departureTime };
+    };
+    
     
     // Check to see if we got this passed
     if (details) {
         this.setId( details.id );
         this.setTransport( details.setTransport );
-        this.setName( details.destination.Name + " " + details.departureTime );
-        this.setDepartureTime( details.departureTime );
+        this.setName( details.destination.Name + " @ " + details.departureTime );
+        this.setDepartureTime( details.departureTime );        
+        users = new Array();
+        joinTimes = new Array();
         this.joinOuting( details.user );
         this.setDestination( details.destination );
         this.meetingPlace = ( details.meetingPlace );
+
     }
 }
 
