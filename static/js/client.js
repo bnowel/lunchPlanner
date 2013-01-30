@@ -27,18 +27,28 @@ $(function() {
         var $this = $(this);
         
         console.log($this.data('destination'));
-        $('.modal').modal('show');
+        $('.modal.create-outing').modal('show');
         $('#yourName').focus();
-        $('#addOutingBtn').data("destination", $this.data('destination'));
-        
+        $('#addOutingBtn').data("destination", $this.data('destination'));        
     });
     
-    $('#addOutingBtn').click(function() {        
+    $('.searchResults').on('click', '.join-outing', function() {
+        var $this = $(this);
+        
+        $('.modal.join-outing').modal('show');
+        $('#yourNameJoin').focus();
+        $('#addOutingBtn').data("outing", $this.data('outing'));        
+    });
+    
+    $('#addOutingBtn').click(function() {
         socket.emit('createOuting', { destination: $(this).data('destination'), user: { name: $('#yourName').val(), availableCarSeats: $('#availableSeats').val() }, departureTime: $('#departureTime').val(), meetingPlace: $('#meetingPlace').val(), drivingTransport: $('#drivingTransport').val(), walkingTransport: $('#walkingTransport').val() });
         $('.modal').modal('hide');
     });
     
-    $('.searchResults').popover({ selector: '[rel=popover]', html: true, trigger: 'hover', placement: 'bottom' });
+    $('#joinOutingBtn').click(function() {
+        socket.emit('joinOuting', { destination: $(this).data('destination'), user: { name: $('#yourName').val(), availableCarSeats: $('#availableSeats').val() } });
+        $('.modal').modal('hide');
+    });
     
     //Search button submits on pressing the 'Enter' key
     $('#terms').keypress(function(e){

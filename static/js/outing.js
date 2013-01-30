@@ -159,7 +159,7 @@ function Outing(details) {
         {
             flattifiedUsers.push(users[i].flattify());
         }
-        
+                
         return { id: id, name: name, destination: destination, meetingPlace: meetingPlace, users: flattifiedUsers, joinTimes: joinTimes, hasDriver: hasDriver, availableCarSeats: availableCarSeats, transport: transport, departureTime: departureTime };
     };
     

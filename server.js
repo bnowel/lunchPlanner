@@ -89,6 +89,11 @@ io.sockets.on('connection', function (socket) {
         }
         socket.emit('updateOutings', flattifiedOutingList);
     });
+    
+    socket.on('joinOuting', function(data) {
+        console.log(data);
+    });
+    
     socket.on('disconnect', function() {
         console.log('user disconnected');
     });
