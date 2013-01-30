@@ -48,7 +48,7 @@ $(function() {
     $('.searchResults').popover({ selector: '[rel=popover]', html: true, trigger: 'hover', placement: 'bottom' });
     
     $('#joinOutingBtn').click(function() {
-        socket.emit('joinOuting', { destination: $(this).data('outing'), user: { name: $('#yourNameJoin').val(), availableCarSeats: $('#availableSeats').val() } });
+        socket.emit('joinOuting', { outing: $(this).data('outing'), user: { name: $('#yourNameJoin').val(), availableCarSeats: $('#availableSeats').val() } });
         $('.modal').modal('hide');
     });
     

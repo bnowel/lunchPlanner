@@ -58,6 +58,8 @@ app.get('/search', function(req, res) {
 });
 
 function updateOutings(socket) {
+    console.log("updateOutings()");
+    
     var flattifiedOutingList = [];
     
     for(var i = 0; i < outingList.length; i++)
@@ -74,15 +76,17 @@ function addMinutes(date, minutes) {
     return new Date(date.getTime() + minutes*60000);
 }
 
-function getOutingFromData(socketId, data) {
+function getUserFromCreateOuting(socketId, data) {
     // If someone doesn't fill in the number of seats then say it's zero
     var availableSeats = parseInt(data.user.availableCarSeats, 10) || 0,
         isUserDriver = availableSeats > 0;
     
     console.log("Number of seats: " + availableSeats);
     var userData = {id: socketId, name: data.user.name, isDriver: isUserDriver, availableCarSeats: availableSeats };
-    var newUser = new User(userData);
-    
+    return new User(userData);
+}
+
+function getOutingFromCreateOuting(user, data) {
     var transport = "";
     
     if (data.drivingTransport)
@@ -90,14 +94,16 @@ function getOutingFromData(socketId, data) {
     else
         transport = "walk";
     
+    console.log(data.destination);
+    
     return new Outing({ 
-        id: outingID++, 
-        setTransport: transport, 
-        departureTime: data.departureTime || addMinutes(new Date(), 30), 
-        user: newUser, 
-        destination: data.destination, 
-        meetingPlace: data.meetingPlace
-    });    
+            id: outingID++, 
+            setTransport: transport, 
+            departureTime: data.departureTime || addMinutes(new Date(), 30).getTime(), 
+            user: user, 
+            destination: data.destination, 
+            meetingPlace: data.meetingPlace
+        });
 }
 
 // When someone connects
@@ -108,21 +114,33 @@ io.sockets.on('connection', function (socket) {
     updateOutings(socket);
     
     socket.on('createOuting', function(data) {
-        var outing = getOutingFromData(socket.id, data);
+        var user = getUserFromCreateOuting(socket.id, data),
+            outing = getOutingFromCreateOuting(user, data);
         
         outingList.push(outing);
         updateOutings(socket);
     });
     
     socket.on('joinOuting', function(data) {
-        var outing = getOutingFromData(socket.id, data);
+        var outingId = data.outing.id;
         
-        outingList.push(outing);
+        for (var i = 0; i < outingList.length; i++) {
+            if (outingList[i].getId() == outingId) {
+                console.log("Found outing and joining it");
+                outingList[i].joinOuting( getUserFromCreateOuting(socket.id, data) );
+            }
+        }
+        
         updateOutings(socket);
     });
     
     socket.on('disconnect', function() {
-        // Remove user for any outings they are a part of
+        // Remove user from any outings they are a part of
+        for (var i = 0; i < outingList.length; i++) {
+            
+            // The socket id is the user id
+            outingList[i].leaveOuting(socket.id);
+        }
         updateOutings(socket);
     });
 });

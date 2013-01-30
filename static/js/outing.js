@@ -84,11 +84,11 @@ function Outing(details) {
     
     // User tries to join an outing.
     this.joinOuting = function(user) {
-        if (user === "")
+        if (!user)
             throw "Must enter a user Object";
             
         users.push(user);
-        joinTimes.push({ id: user.id, time: new Date().getTime()});
+        joinTimes.push({ id: user.getId(), time: new Date().getTime()});
         
         console.log(transport + " |||| " + JSON.stringify(user.flattify()));
         if (transport == "drive" && user.getIsDriver())
@@ -99,20 +99,20 @@ function Outing(details) {
     };
     
     // User tries to leave an outing.
-    this.leaveOuting = function(user){
-        if (user === "")
-            throw "Must enter a user object";
+    this.leaveOuting = function(userId){
+        var foundUser = false;
         
         // Find index of user we're removing.
         var index = -1;
         for (var i = 0; i < joinTimes.length; i++)
         {
-            if (joinTimes[i].id == user.id)
+            if (joinTimes[i].id == userId)
             {
+                foundUser = true;
                 index = i;
                 
                 // If this user was a driver, remove the outing's car. <assumes single driver>
-                if (user.isDriver)
+                if (users[i].getIsDriver())
                 {
                     hasDriver = false;
                     availableCarSeats = 0;
@@ -122,8 +122,11 @@ function Outing(details) {
             }
         }
         
-        joinTimes.splice(i, 1);
-        users.splice(i, 1);
+        if (foundUser) {
+            joinTimes.splice(i, 1);
+            users.splice(i, 1);
+        }
+        return foundUser;
     };
     
     
