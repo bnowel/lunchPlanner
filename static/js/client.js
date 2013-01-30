@@ -30,6 +30,8 @@ $(function() {
         socket.emit('createOuting', $this.data('outing'));
     });
     
+    $('.searchResults').popover({ selector: '[rel=popover]', html: true, trigger: 'hover', placement: 'bottom' });
+    
     //Search button submits on pressing the 'Enter' key
     $('#terms').keypress(function(e){
        if(e.which==13){
