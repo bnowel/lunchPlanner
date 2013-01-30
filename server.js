@@ -58,7 +58,7 @@ app.get('/search', function(req, res) {
 });
 
 function updateOutings(socket) {
-    var flattifiedOutingList = new Array();
+    var flattifiedOutingList = [];
     
     for(var i = 0; i < outingList.length; i++)
     {
@@ -75,9 +75,12 @@ io.sockets.on('connection', function (socket) {
     updateOutings(socket);
     
     socket.on('createOuting', function(data) {
-        var isUserDriver = data.user.availableCarSeats > 0;
-        console.log("Number of seats: " + data.user.availableCarSeats);
-        var userData = {id: socket.id, name: data.user.name, isDriver: isUserDriver, availableCarSeats: data.user.availableCarSeats };
+        // If someone doesn't fill in the number of seats then say it's zero
+        var availableSeats = parseInt(data.user.availableCarSeats, 10) || 0,
+            isUserDriver = availableSeats > 0;
+        
+        console.log("Number of seats: " + availableSeats);
+        var userData = {id: socket.id, name: data.user.name, isDriver: isUserDriver, availableCarSeats: availableSeats };
         var newUser = new User(userData);
         
         var transport = "";

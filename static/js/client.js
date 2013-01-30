@@ -32,7 +32,7 @@ $(function() {
         $('#addOutingBtn').data("destination", $this.data('destination'));        
     });
     
-    $('.searchResults').on('click', '.join-outing', function() {
+    $('.outings').on('click', '.join-outing', function() {
         var $this = $(this);
         
         $('.modal.join-outing').modal('show');

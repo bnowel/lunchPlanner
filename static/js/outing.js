@@ -60,7 +60,7 @@ function Outing(details) {
     // End transport
     
     // If this has any available car seats. Internally set
-    var availableCarSeats;
+    var availableCarSeats = 0;
     this.getAvailableCarSeats = function() {
         return availableCarSeats;  
     };
@@ -170,8 +170,8 @@ function Outing(details) {
         this.setTransport( details.setTransport );
         this.setName( details.destination.Name + " @ " + details.departureTime );
         this.setDepartureTime( details.departureTime );        
-        users = new Array();
-        joinTimes = new Array();
+        users = [];
+        joinTimes = [];
         this.joinOuting( details.user );
         this.setDestination( details.destination );
         this.meetingPlace = ( details.meetingPlace );
