@@ -31,8 +31,7 @@ div.logo {
 section.main {
     margin: 0 auto;
     margin-top: 79px;
-    max-width: 75em;
-    min-width: 50em;
+    width: 50em;
     position: relative;
 }
 section.column {
@@ -73,7 +72,7 @@ section.column {
 }
 .business-block .biz-info {
     float: left;
-    margin: 32px 0 0;
+    margin: 11px 0 0;
 }
 .business-block img.food {
     float: left;
@@ -92,25 +91,33 @@ section.column {
     border: 1px solid rgb(200,227,250);
     margin: 10px 0;
     border-radius: 4px;
-    padding: 5px 5px 5px 0;
+    padding: 5px 0 5px 0;
     background: white;
     box-sizing: border-box;
-    height: 10em;
+    height: 12em;
 }
 .left-outing-info {
     overflow: hidden;
-    width: 70%;
+    width: 65%;
     float: left;
 }
 .right-outing-info {
     overflow: hidden;
-    width: 30%;
+    width: 35%;
     float: left;
     border-left: .063em solid rgb(200,227,250);
     height: 109%;
     box-sizing: border-box;
-    padding: .5em;
+    padding: .5em 0 .5em .5em;
     margin: -.5em 0; 
+}
+.open-seats, .join-outing {
+    font-size: .8em;
+}
+.join-outing {
+    padding: 7px 5px;
+    border-radius: 4px;
+    display: inline-block;
 }
 .outing ul {
     width: 100%;
