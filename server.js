@@ -69,7 +69,6 @@ io.sockets.on('connection', function (socket) {
         var userData = {id: socket.id, name: data.user.name, isDriver: isUserDriver, availableCarSeats: data.user.availableCarSeats };
         var newUser = new User(userData);
         
-        console.log("Destination: " + JSON.stringify(data.destination));
         var transport = "";
         
         if (data.drivingTransport)
@@ -90,6 +89,11 @@ io.sockets.on('connection', function (socket) {
         }
         socket.emit('updateOutings', flattifiedOutingList);
     });
+    
+    socket.on('joinOuting', function(data) {
+        console.log(data);
+    });
+    
     socket.on('disconnect', function() {
         console.log('user disconnected');
     });

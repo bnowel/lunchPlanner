@@ -42,7 +42,7 @@
             </div>
             <div class="right-outing-info">
                 <span class="open-seats" data-bind="text: $data.availableCarSeats + ' available'"></span>
-                <a href="#" class="join-outing">Jump in!</a>
+                <a href="#" class="join-outing" data-bind="attr: { 'data-outing': ko.toJSON($data) }">Jump in!</a>
             </div>
         </div>
     </section>
@@ -50,7 +50,7 @@
 </section>
 </div>
 
-<div class="modal hide fade">
+<div class="modal create-outing hide fade">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3 class="green">Getting to know you</h3>
@@ -84,6 +84,29 @@
   </div>
   <div class="modal-footer">
     <a href="#" id="addOutingBtn" class="btn btn-success">Done</a>
+  </div>
+</div>
+
+<div class="modal join-outing hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 class="green">Getting to know you</h3>
+  </div>
+  <div class="modal-body">
+    <ul>
+        <li>
+            <label for="yourNameJoin">What is your name?</label>
+            <input type="text" id="yourNameJoin" />            
+        </li>
+        <li>
+            <label for="availableSeatsJoin">If you can drive how many open seats are in your car?</label>
+            <input type="number" id="availableSeatsJoin" />
+        </li>
+    </ul>
+
+  </div>
+  <div class="modal-footer">
+    <a href="#" id="joinOutingBtn" class="btn btn-success">Done</a>
   </div>
 </div>
 
