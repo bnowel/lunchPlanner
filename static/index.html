@@ -15,12 +15,19 @@
 <!-- ko if: businesses != null -->    
     <section class="searchResults column" data-bind="foreach: businesses">
         <div class="business-block">
-            <img data-bind="attr:{src: BizImage}" />
-            <span data-bind="text: Name"> </span>
-            <span data-bind="text: Address"> </span>
-            <span data-bind="text: Phone"> </span>
-            <img data-bind="attr:{src: Rating}" /> 
-            <button class="create-outing green" data-bind="attr: { 'data-destination': ko.toJSON($data) }">Go!</button>
+            <div >
+             <h2 data-bind="text: Name"> </h2>
+             <img class="rating" data-bind="attr:{src: Rating}" />
+            </div>
+            <img class="food" data-bind="attr:{src: BizImage}" />
+            <div class="info">
+                <p data-bind="text: Review"></p>
+                <ul class="biz-info">
+                    <li> <span data-bind="text: Address"> </span></li>
+                    <li><span data-bind="text: Phone"> </span></li>
+                </ul>
+            </div>
+            <button class="create-outing green" data-bind="attr: { 'data-outing': ko.toJSON($data) }">Go!</button>
         </div>
     </section>
 <!-- /ko -->    

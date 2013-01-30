@@ -38,6 +38,13 @@ $(function() {
         $('.modal').modal('hide');
     });
     
+    //Search button submits on pressing the 'Enter' key
+    $('#terms').keypress(function(e){
+       if(e.which==13){
+           $('#search').click();
+       } 
+    });
+     
     // Socket Stuff
     var socket = io.connect('/');
     

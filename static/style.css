@@ -10,7 +10,7 @@ ul{
 a {
     text-decoration: none;
 }
-h1,h2,h3,h4,h5,h6 {
+h1,h2,h3,h4,h5,h6,p {
     margin: 0;
 }
 /* everything else */
@@ -33,9 +33,41 @@ section.column {
     margin-right: .5em;
 }
 .business-block {
+    position: relative;
     float: left;
     width: 100%;
-    margin: .625em;
+    margin: .625em 0;
+    box-sizing: border-box;
+    background: white;
+    padding: 5px;
+}
+.business-block h2 {
+    width: auto;
+    border: none;
+    padding: 0;
+    font-size: 19px;
+    font-weight: normal;
+}
+.business-block .rating {
+    float: right;
+}
+.business-block .info {
+    float: left;
+    width: 77%;
+    padding: 0 .57em;
+}
+.business-block .biz-info {
+    float: left;
+    margin: 32px 0 0;
+}
+.business-block img.food {
+    float: left;
+    clear: left;
+}
+.create-outing {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
 }
 .outings {
     width: 30%;
