@@ -119,6 +119,9 @@ section.column {
     border-radius: 4px;
     display: inline-block;
 }
+.driver {
+    float: right;
+}
 .outing ul {
     width: 100%;
     float: left;
