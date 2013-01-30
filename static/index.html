@@ -16,14 +16,23 @@
 <!-- ko if: businesses != null -->    
     <section class="searchResults column" data-bind="foreach: businesses">
         <div class="business-block">
-            <img data-bind="attr:{src: BizImage}" />
-            <span data-bind="text: Name"> </span>
-            <a rel="popover" href="#" data-bind="attr: { 'data-content': '<img src=http://maps.googleapis.com/maps/api/staticmap?zoom=12&size=400x400&markers=color:red%7C' + LatLon.lat + ',' + LatLon.lon + '&markers=color:red%7C35.2801517,-120.6626153&sensor=false />' }" data-content="<img src='https://secure.gravatar.com/avatar/0988ff2048a0d9e2625053159f451471?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png'/>"</a>
-                <span data-bind="text: Address"> </span>
-            </a>
-            <span data-bind="text: Phone"> </span>
-            <img data-bind="attr:{src: Rating}" />
-            <button class="create-outing green" data-bind="attr: { 'data-outing': ko.toJSON($data) }">Go!</button>
+            <h2 data-bind="text: Name"> </h2>
+            <img class="rating" data-bind="attr:{src: Rating}" />
+        <img class="food" data-bind="attr:{src: BizImage}" />
+            
+        <div class="info">
+            <p data-bind="text: Review"></p>
+            
+            <ul class="biz-info">
+                <li>
+                    <a rel="popover" href="#" data-bind="attr: { 'data-content': '<img src=http://maps.googleapis.com/maps/api/staticmap?zoom=15&size=400x400&markers=color:red%7C' + LatLon.lat + ',' + LatLon.lon + '&sensor=false />' }" data-content="<img src='https://secure.gravatar.com/avatar/0988ff2048a0d9e2625053159f451471?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png'/>"</a>
+                        <span data-bind="text: Address"> </span>
+                    </a>        
+                </li>
+                <li><span data-bind="text: Phone"> </span></li>
+            </ul>
+        </div>
+        <button class="create-outing green" data-bind="attr: { 'data-outing': ko.toJSON($data) }">Go!</button>
         </div>
     </section>
 <!-- /ko -->    
