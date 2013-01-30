@@ -15,15 +15,28 @@ a {
 h1,h2,h3,h4,h5,h6,p {
     margin: 0;
 }
+h1.title {
+    margin-left: 57px;
+}
+div.logo {
+   background: url('img/logo.png') no-repeat center;
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    z-index: -1;
+    left: -199px;
+    top: -79px;
+}
 /* everything else */
 section.main {
     margin: 0 auto;
+    margin-top: 79px;
     max-width: 75em;
     min-width: 50em;
+    position: relative;
 }
 section.column {
     float: left;
-    border: 1px solid lightgrey;
     border-radius: 4px;
     padding: .625em;
     box-sizing: border-box;
