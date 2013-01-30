@@ -37,26 +37,28 @@
     </section>
 <!-- /ko -->    
 
-<!-- ko if: outings != null -->    
-    <section class="outings column" data-bind="foreach: outings">
+
+    <section class="outings column" >
         <h1>Outings</h1>
-        
-        <div class="outing">
-            <div class="left-outing-info">
-                <h2 data-bind="text: name"></h2>
-                <ul>
-                    <li data-bind="foreach: $data.users">
-                        <span data-bind="text: name"> </span>
-                    </li>                    
-                </ul>
-            </div>
-            <div class="right-outing-info">
-                <span class="open-seats" data-bind="text: $data.availableCarSeats + ' available'"></span>
-                <a href="#" class="join-outing" data-bind="attr: { 'data-outing': ko.toJSON($data) }">Jump in!</a>
+<!-- ko if: outings != null -->    
+        <div data-bind="foreach: outings">
+            <div class="outing">
+                <div class="left-outing-info">
+                    <h2 data-bind="text: name"></h2>
+                    <ul data-bind="foreach: $data.users">
+                        <li>
+                            <span data-bind="text: name"> </span>
+                        </li>                    
+                    </ul>
+                </div>
+                <div class="right-outing-info">
+                    <span class="open-seats" data-bind="text: $data.availableCarSeats + ' available'"></span>
+                    <a href="#" class="join-outing" data-bind="attr: { 'data-outing': ko.toJSON($data) }">Jump in!</a>
+                </div>
             </div>
         </div>
-    </section>
 <!-- /ko -->
+    </section>
 </section>
 </div>
 
