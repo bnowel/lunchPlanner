@@ -7,7 +7,7 @@ var express = require('express'),
     yelpCreds = {};
     
 io.configure(function() {
-  io.set('log level', 1);
+  io.set('log level', 2);
 
   io.set('transports', [
       'xhr-polling'
@@ -71,7 +71,7 @@ app.get('/search', function(req, res) {
 var outingList = [];
 var outingID = 0;
 
-function updateOutings(socket) {
+function updateOutings() {
     console.log("updateOutings()");
     
     var flattifiedOutingList = [];
@@ -83,7 +83,7 @@ function updateOutings(socket) {
             flattifiedOutingList.push(outingList[i].flattify());
         }
     }
-    socket.emit('updateOutings', flattifiedOutingList);
+    io.sockets.emit('updateOutings', flattifiedOutingList);
 }
 
 function addMinutes(date, minutes) {
